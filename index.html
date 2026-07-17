@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio BIM | Paolo Perez</title>
+    <meta name="description" content="Paolo Perez - Modelador y Programador BIM especializado en Autodesk Revit, automatización con Python, C#, Dynamo y Revit API para proyectos de telecomunicaciones.">
+    <meta property="og:title" content="Portafolio BIM | Paolo Perez">
+    <meta property="og:description" content="Modelador y Programador BIM especializado en Autodesk Revit y automatización de procesos BIM.">
+    <meta property="og:type" content="website">
+    <style>
+        /* Estilos Globales */
+        :root {
+            --primary-color: #1e293b; /* Azul oscuro/grisáceo */
+            --accent-color: #0284c7;  /* Azul BIM / Tecnológico */
+            --bg-light: #f8fafc;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Navegación */
+        header {
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 1.4rem;
+            color: var(--primary-color);
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            margin-left: 1.5rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.6rem;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #0f172a 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #cbd5e1;
+            margin-bottom: 2rem;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-ctas a {
+            text-decoration: none;
+            padding: 0.8rem 1.8rem;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .cta-primary {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .cta-primary:hover {
+            background-color: #0369a1;
+        }
+
+        .cta-secondary {
+            background-color: transparent;
+            color: white;
+            border: 1px solid #94a3b8;
+        }
+
+        .cta-secondary:hover {
+            border-color: white;
+            background-color: rgba(255,255,255,0.08);
+        }
+
+        /* Sección Sobre mí */
+        .about-section {
+            max-width: 1000px;
+            margin: 4rem auto 0 auto;
+            padding: 0 2rem;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--accent-color);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 0.3rem;
+        }
+
+        /* Sección de Proyectos (Portafolio) */
+        .portfolio-section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 4px;
+            background-color: var(--accent-color);
+            margin: 0.5rem auto 0 auto;
+            border-radius: 2px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        /* Tarjeta estructurada en columna para alinear botones abajo */
+        .project-card {
+            background: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        /* Contenedor de imagen para recortar el desborde del zoom */
+        .img-container {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+            background-color: #ffffff;
+            cursor: pointer;
+        }
+
+        /* Efecto zoom y compatibilidad con planos de fondo blanco */
+        .project-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Ideal para planos enteros */
+            object-position: center;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .img-container:hover .project-img {
+            transform: scale(1.25); /* Zoom suave de 25% */
+        }
+
+        /* Mini-etiqueta flotante informativa */
+        .zoom-hint {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(15, 23, 42, 0.75);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            pointer-events: none;
+            font-weight: 500;
+        }
+
+        .project-info {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background-color: #f1f5f9;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .tag.bim {
+            background-color: #e0f2fe;
+            color: var(--accent-color);
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .project-description {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Botón de expansión para planos */
+        .view-btn {
+            background: none;
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 0.6rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+            text-align: center;
+            width: 100%;
+        }
+
+        .view-btn:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        /* Estilos de Pantalla Completa (Lightbox Overlay) */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(15, 23, 42, 0.96);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .lightbox-img {
+            max-width: 95%;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            background: white; /* Resalta los planos transparentes */
+            cursor: default;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 3rem;
+            cursor: pointer;
+            user-select: none;
+            transition: color 0.2s;
+        }
+
+        .lightbox-close:hover {
+            color: var(--accent-color);
+        }
+
+        /* Habilidades y Software */
+        .skills-section {
+            background-color: #ffffff;
+            padding: 4rem 2rem;
+        }
+
+        .skills-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .skills-list {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .skill-badge {
+            background-color: var(--bg-light);
+            border: 1px solid #e2e8f0;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 500;
+        }
+
+        /* Contacto */
+        .contact-section {
+            max-width: 600px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .contact-btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .contact-btn:hover {
+            background-color: #0369a1;
+        }
+
+        .contact-options {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .contact-options .view-btn,
+        .contact-options a.view-btn {
+            width: auto;
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+        }
+
+        .email-fallback {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: #94a3b8;
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: #cbd5e1;
+            margin: 0 0.5rem;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .grid { grid-template-columns: 1fr; }
+
+            .nav-toggle {
+                display: block;
+            }
+
+            nav {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #ffffff;
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 1rem 2rem;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+                display: none;
+            }
+
+            nav.open {
+                display: flex;
+            }
+
+            nav a {
+                margin: 0.6rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo">Paolo Perez <span>BIM</span></div>
+            <button class="nav-toggle" onclick="toggleNav()" aria-label="Abrir menú">&#9776;</button>
+            <nav id="main-nav">
+                <a href="#proyectos">Proyectos</a>
+                <a href="#habilidades">Habilidades</a>
+                <a href="#contacto">Contacto</a>
+                <a href="https://www.linkedin.com/in/TU-USUARIO" target="_blank">LinkedIn</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Hola, soy Paolo Perez</h1>
+            <p>Soy Modelador BIM y Programador BIM especializado en Autodesk Revit, con experiencia en el desarrollo de modelos BIM para proyectos de telecomunicaciones y en la automatización de procesos mediante Python, C#, Dynamo y la API de Revit. Mi objetivo es optimizar los flujos de trabajo, mejorar la calidad de la información y desarrollar herramientas que incrementen la productividad de los equipos BIM.</p>
+            <div class="hero-ctas">
+                <a href="#contacto" class="cta-primary">Contáctame</a>
+                <a href="cv-paolo-perez.pdf" class="cta-secondary" download>Descargar CV</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-section" id="sobre-mi">
+        <div class="about-stats">
+            <div class="stat-card">
+                <div class="stat-number">+4</div>
+                <div class="stat-label">años de experiencia BIM</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">+3</div>
+                <div class="stat-label">proyectos completados</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">LOD 350</div>
+                <div class="stat-label">nivel de desarrollo habitual</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">+15</div>
+                <div class="stat-label">herramientas propias desarrolladas</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="portfolio-section" id="proyectos">
+        <h2 class="section-title">Mis Proyectos BIM</h2>
+        <div class="grid">
+
+            <!-- PROYECTO 1 -->
+            <div class="project-card">
+                <div class="img-container" onclick="openLightbox(this)">
+                    <img src="images/proyecto1.jpg" alt="Planimetria en BIM" class="project-img">
+                    <div class="zoom-hint">🔍 Expandir plano</div>
+                </div>
+                <div class="project-info">
+                    <div>
+                        <div class="project-tags">
+                             <span class="tag bim">Revit MEP</span>
+                             <span class="tag">Telecomunicaciones</span>
+                             <span class="tag">LOD 350</span>
+                        </div>
+                        <h3 class="project-title">Planimetría BIM de Telecomunicaciones</h3>
+                        <p class="project-description">Experiencia en la elaboración de documentación técnica para proyectos de telecomunicaciones mediante metodología BIM, desarrollando planos de instalación, detalles constructivos, cortes, elevaciones, esquemas y documentación ejecutiva. Coordinación multidisciplinaria y aplicación de estándares BIM para garantizar modelos y planos de alta calidad, reduciendo interferencias y optimizando los procesos de construcción.</p>
+                    </div>
+                    <button class="view-btn" onclick="openLightbox(this.closest('.project-card').querySelector('.img-container'))">Ver plano completo</button>
+                </div>
+            </div>
+
+            <!-- PROYECTO 2 -->
+            <div class="project-card">
+                <div class="img-container" onclick="openLightbox(this)">
+                    <img src="images/proyecto2.jpg" alt="Modelado 3D Revit" class="project-img">
+                    <div class="zoom-hint">🔍 Expandir plano</div>
+                </div>
+                <div class="project-info">
+                    <div>
+                        <div class="project-tags">
+                            <span class="tag bim">Revit</span>
+                            <span class="tag">Navisworks</span>
+                            <span class="tag">Coordinación BIM</span>
+                        </div>
+                        <h3 class="project-title">Modelado BIM de Telecomunicaciones</h3>
+                        <p class="project-description">Desarrollo de modelos BIM para la especialidad de telecomunicaciones, incorporando el sistema de cableado estructurado, canalizaciones, bandejas portacables, cuartos de telecomunicaciones, centro de datos e infraestructura asociada. Modelos coordinados con las demás especialidades para optimizar la ejecución y reducir interferencias durante la construcción.</p>
+                    </div>
+                    <button class="view-btn" onclick="openLightbox(this.closest('.project-card').querySelector('.img-container'))">Ver plano completo</button>
+                </div>
+            </div>
+
+            <!-- PROYECTO 3 -->
+            <div class="project-card">
+                <div class="img-container" onclick="openLightbox(this)">
+                    <img src="images/proyecto3.jpg" alt="Desarrollo de automatizaciones" class="project-img">
+                    <div class="zoom-hint">🔍 Expandir plano</div>
+                </div>
+                <div class="project-info">
+                    <div>
+                        <div class="project-tags">
+                            <span class="tag bim">Python</span>
+                            <span class="tag">C#</span>
+                            <span class="tag">Revit API</span>
+                        </div>
+                        <h3 class="project-title">Desarrollo de Herramientas BIM</h3>
+                        <p class="project-description">Desarrollo de complementos y herramientas personalizadas para Autodesk Revit orientadas a la automatización de procesos BIM, gestión de datos, creación de documentación y optimización de flujos de trabajo. Implementación de soluciones mediante Python, C#, Dynamo y la API de Revit para incrementar la productividad y reducir tareas repetitivas.</p>
+                    </div>
+                    <button class="view-btn" onclick="openLightbox(this.closest('.project-card').querySelector('.img-container'))">Ver código / interfaz completo</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Overlay de Pantalla Completa Oculto -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-img" id="lightbox-img" src="" alt="Vista ampliada" onclick="event.stopPropagation()">
+    </div>
+
+    <section class="skills-section" id="habilidades">
+        <div class="skills-container">
+            <h2 class="section-title">Software & Competencias</h2>
+            <div class="skills-list">
+                <span class="skill-badge">Autodesk Revit</span>
+                <span class="skill-badge">Navisworks Manage</span>
+                <span class="skill-badge">Dynamo</span>
+                <span class="skill-badge">Python</span>
+                <span class="skill-badge">C#</span>
+                <span class="skill-badge">Revit API</span>
+                <span class="skill-badge">pyRevit</span>
+                <span class="skill-badge">Coordinación BIM</span>
+                <span class="skill-badge">Detección de Interferencias</span>
+                <span class="skill-badge">LOD 300 / 350 / 400</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section" id="contacto">
+        <h2 class="section-title">¿Trabajamos juntos?</h2>
+        <p>Estoy disponible para proyectos freelance, consultorías BIM o puestos a tiempo completo. ¡Hablemos!</p>
+        <div class="contact-options">
+            <a href="mailto:paoloperezinga@gmail.com" class="contact-btn">Enviar correo</a>
+            <button class="view-btn" onclick="copiarCorreo()" id="copy-btn">Copiar correo</button>
+            <a href="https://wa.me/51983264086" target="_blank" class="view-btn">WhatsApp</a>
+        </div>
+        <p class="email-fallback">Si el botón de correo no abre tu cliente de email, usa "Copiar correo" y pégalo donde prefieras: paoloperezinga@gmail.com</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Paolo Perez. Todos los derechos reservados.</p>
+        <p>
+            <a href="mailto:paoloperezinga@gmail.com">Correo</a> ·
+            <a href="https://www.linkedin.com/in/TU-USUARIO" target="_blank">LinkedIn</a>
+        </p>
+    </footer>
+
+    <!-- Lógica de Control -->
+    <script>
+        function openLightbox(containerElement) {
+            const imgTarget = containerElement.querySelector('.project-img');
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+
+            lightboxImg.src = imgTarget.src;
+            lightboxImg.alt = imgTarget.alt;
+            lightbox.style.display = 'flex';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+
+        function copiarCorreo() {
+            navigator.clipboard.writeText('paoloperezinga@gmail.com').then(() => {
+                const btn = document.getElementById('copy-btn');
+                const original = btn.textContent;
+                btn.textContent = '¡Copiado!';
+                setTimeout(() => { btn.textContent = original; }, 1500);
+            });
+        }
+
+        function toggleNav() {
+            document.getElementById('main-nav').classList.toggle('open');
+        }
+    </script>
+</body>
+</html>
